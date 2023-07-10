@@ -1,14 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+import datetime
 
 
 class Company(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    
+    name = models.CharField(max_length=100, unique=True) 
     def __str__(self):
         return self.name
-    
+    #showing username who are belongs to a particular company
     def connected_employees(self):
         return ", ".join(self.employees.values_list('user__username', flat=True))
 
@@ -50,6 +50,6 @@ class DeviceAllocation(models.Model):
 
 class DeviceLog(models.Model):
     device_allocation = models.ForeignKey(DeviceAllocation, on_delete=models.CASCADE,related_name="device_log")
-    condition = models.TextField()
     checkout_date = models.DateTimeField(auto_now_add=True)
     checkin_date = models.DateTimeField(blank=True, null=True)
+    

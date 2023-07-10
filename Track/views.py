@@ -2,7 +2,8 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .serializers import CompanySerializer, EmployeeSerializer, UserSerializer,DeviceSerializer, DeviceAllocationSerializer
-from .models import Company, Employee, Device,DeviceAllocation
+from .models import Company, Employee, Device,DeviceAllocation,DeviceLog
+import datetime
 
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
@@ -30,6 +31,8 @@ class CompanyViewSet(viewsets.ModelViewSet):
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+    
+    
 
 
 class DeviceViewSet(viewsets.ModelViewSet):
@@ -41,3 +44,10 @@ class DeviceViewSet(viewsets.ModelViewSet):
 class DeviceAllocationViewSet(viewsets.ModelViewSet):
     queryset = DeviceAllocation.objects.all()
     serializer_class = DeviceAllocationSerializer
+
+
+# class DeviceLogViewSet(viewsets.ModelViewSet):
+#     queryset = DeviceLog.objects.all()
+#     serializer_class = DeviceLogSerializer
+    
+    

@@ -1,12 +1,14 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Employee, Company,Device,DeviceAllocation,DeviceLog
+from .models import Employee, Company,Device,DeviceAllocation
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'password']
 
+        
+        
 class DeviceSerializer(serializers.ModelSerializer): 
     class Meta:
         model = Device
@@ -14,8 +16,6 @@ class DeviceSerializer(serializers.ModelSerializer):
         
 
 class DeviceAllocationSerializer(serializers.ModelSerializer):
-    device = serializers.StringRelatedField()
-    employee = serializers.StringRelatedField()
     class Meta:
         model = DeviceAllocation
         fields = ['id', 'device', 'employee', 'start_date', 'end_date']
@@ -46,9 +46,7 @@ class DeviceAllocationSerializer(serializers.ModelSerializer):
 
         if DeviceAllocation.objects.filter(device=device, employee=employee).exists():
             raise serializers.ValidationError("This device is already allocated to the employee.")
-
-
-
+    
 class EmployeeSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     device_allocation_employee = DeviceAllocationSerializer(many=True, read_only=True)
@@ -61,7 +59,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**user_data)
         employee = Employee.objects.create(user=user, **validated_data)
         return employee
- 
+    
     
     
 class CompanySerializer(serializers.ModelSerializer):
@@ -70,3 +68,4 @@ class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = '__all__'
+        

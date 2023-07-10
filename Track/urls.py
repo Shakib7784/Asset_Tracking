@@ -8,6 +8,7 @@ router.register(r'companies', CompanyViewSet, basename='company')
 router.register(r'employees', EmployeeViewSet, basename='employee')
 router.register(r'devices', DeviceViewSet,basename="device")
 router.register(r"deviceAllocation",DeviceAllocationViewSet,basename="deviceAllocation")
+# router.register(r"devicelog",DeviceLogViewSet,basename="devicelog")
 
 urlpatterns = [
     # Register the router URLs
