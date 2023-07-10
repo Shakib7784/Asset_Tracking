@@ -12,6 +12,10 @@ class CompanyModel(admin.ModelAdmin):
 class EmployeeModel(admin.ModelAdmin):
     list_display=["user"]
     
+@admin.register(Device)
+class DeviceModel(admin.ModelAdmin):
+    list_display=["name","model","MAC_Address","company"]
     
-   
-
+@admin.register(DeviceAllocation)
+class deviceAllocationModel(admin.ModelAdmin):
+      list_display=["device","employee","start_date","end_date"]  

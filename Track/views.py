@@ -1,8 +1,8 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .serializers import CompanySerializer, EmployeeSerializer, UserSerializer
-from .models import Company, Employee
+from .serializers import CompanySerializer, EmployeeSerializer, UserSerializer,DeviceSerializer, DeviceAllocationSerializer
+from .models import Company, Employee, Device,DeviceAllocation
 
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
@@ -25,8 +25,19 @@ class CompanyViewSet(viewsets.ModelViewSet):
         employee_serializer = EmployeeSerializer(employee)
 
         return Response(employee_serializer.data, status=status.HTTP_201_CREATED)
-
-
+    
+    
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+
+
+class DeviceViewSet(viewsets.ModelViewSet):
+    queryset = Device.objects.all()
+    serializer_class = DeviceSerializer
+    
+    
+
+class DeviceAllocationViewSet(viewsets.ModelViewSet):
+    queryset = DeviceAllocation.objects.all()
+    serializer_class = DeviceAllocationSerializer
